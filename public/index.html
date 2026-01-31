@@ -3,15 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>고양이 사진</title>
+  <title>고정비 줄이기 플래너 | 생활비 절약이 바로 돈이 되는 페이지</title>
+  <meta name="description" content="1인 가구·초보 직장인을 위한 고정비 절약 플래너. 무료 계산기, 체크리스트, 30일 루틴으로 월 지출을 줄이고 현금흐름을 개선하세요." />
+  <meta name="theme-color" content="#f5c9a8" />
   <style>
     :root {
-      --bg-1: #f6e7d8;
-      --bg-2: #f4c7ab;
-      --ink: #1f1a17;
-      --accent: #2b7a78;
-      --card: #fff6ee;
-      --shadow: rgba(0, 0, 0, 0.18);
+      --bg-1: #f9e9d7;
+      --bg-2: #f0bfa2;
+      --ink: #1f1b16;
+      --muted: rgba(31, 27, 22, 0.7);
+      --accent: #1f7a57;
+      --accent-2: #0f3d2f;
+      --card: #fff7ef;
+      --shadow: rgba(16, 24, 40, 0.18);
+      --chip: #f8efe6;
+      --border: rgba(31, 27, 22, 0.14);
     }
 
     * { box-sizing: border-box; }
@@ -19,160 +25,475 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: "Space Grotesk", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      font-family: "Manrope", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(80vmax 80vmax at 10% 10%, rgba(255, 255, 255, 0.65), transparent 55%),
-        radial-gradient(60vmax 60vmax at 90% 20%, rgba(43, 122, 120, 0.18), transparent 60%),
-        linear-gradient(135deg, var(--bg-1), var(--bg-2));
-      display: grid;
-      place-items: center;
-      padding: 32px 18px;
+        radial-gradient(70vmax 70vmax at 8% 12%, rgba(255, 255, 255, 0.65), transparent 55%),
+        radial-gradient(55vmax 55vmax at 90% 16%, rgba(31, 122, 87, 0.16), transparent 60%),
+        linear-gradient(140deg, var(--bg-1), var(--bg-2));
+      display: block;
+      padding: 28px 18px 80px;
     }
 
-    .frame {
-      width: min(880px, 92vw);
+    .shell {
+      width: min(1120px, 92vw);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+      align-items: stretch;
       background: var(--card);
-      border-radius: 26px;
-      box-shadow: 0 25px 60px var(--shadow);
+      border-radius: 30px;
       padding: 28px;
+      box-shadow: 0 22px 60px var(--shadow);
       position: relative;
       overflow: hidden;
       animation: floatIn 900ms ease;
     }
 
-    .frame::before,
-    .frame::after {
+    .hero::before,
+    .hero::after {
       content: "";
       position: absolute;
-      width: 220px;
-      height: 220px;
+      width: 230px;
+      height: 230px;
       border-radius: 50%;
-      background: rgba(43, 122, 120, 0.12);
-      filter: blur(0.5px);
+      background: rgba(31, 122, 87, 0.12);
       z-index: 0;
     }
 
-    .frame::before { top: -80px; right: -70px; }
-    .frame::after { bottom: -90px; left: -70px; }
+    .hero::before { top: -80px; right: -80px; }
+    .hero::after { bottom: -90px; left: -90px; }
 
-    header {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .hero-text,
+    .hero-card {
       position: relative;
       z-index: 1;
     }
 
     h1 {
-      margin: 0;
-      font-size: clamp(28px, 4vw, 44px);
+      font-family: "DM Serif Display", "Gowun Batang", serif;
+      font-size: clamp(30px, 4vw, 46px);
+      margin: 0 0 12px;
       letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-family: "DM Serif Display", "Gowun Batang", serif;
+      font-size: clamp(22px, 2.4vw, 30px);
+      margin: 0 0 12px;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
     }
 
     p {
       margin: 0;
+      color: var(--muted);
       font-size: 16px;
-      color: rgba(31, 26, 23, 0.7);
+      line-height: 1.6;
     }
 
-    .photo {
-      margin-top: 22px;
-      border-radius: 18px;
-      overflow: hidden;
-      position: relative;
-      z-index: 1;
-      border: 2px solid rgba(43, 122, 120, 0.2);
-      background: #fef9f3;
-    }
-
-    .photo img {
-      display: block;
-      width: 100%;
-      height: min(55vh, 460px);
-      object-fit: cover;
-      transform: scale(1.02);
-      transition: transform 600ms ease;
-    }
-
-    .photo:hover img {
-      transform: scale(1.07);
-    }
-
-    .actions {
-      margin-top: 20px;
+    .chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
+      gap: 8px;
+      margin-top: 14px;
     }
 
-    button {
+    .chip {
+      background: var(--chip);
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: rgba(31, 27, 22, 0.8);
+    }
+
+    .cta {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
       border: none;
       background: var(--accent);
       color: #fdfcfb;
-      padding: 12px 20px;
+      padding: 12px 18px;
       border-radius: 999px;
-      font-size: 15px;
+      font-size: 14px;
       cursor: pointer;
       transition: transform 200ms ease, box-shadow 200ms ease;
-      box-shadow: 0 10px 20px rgba(43, 122, 120, 0.3);
+      box-shadow: 0 10px 22px rgba(31, 122, 87, 0.28);
     }
 
-    button:hover {
+    .btn.secondary {
+      background: transparent;
+      color: var(--accent-2);
+      border: 1px solid var(--accent-2);
+      box-shadow: none;
+    }
+
+    .btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 14px 26px rgba(43, 122, 120, 0.35);
+      box-shadow: 0 14px 26px rgba(31, 122, 87, 0.35);
     }
 
-    .hint {
+    .hero-card {
+      background: #fff;
+      border: 1px solid rgba(31, 27, 22, 0.1);
+      border-radius: 20px;
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .stat {
+      display: grid;
+      gap: 4px;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(31, 122, 87, 0.08);
+    }
+
+    .stat strong {
+      font-size: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: 0 16px 40px var(--shadow);
+      border: 1px solid rgba(31, 27, 22, 0.08);
+      animation: fadeUp 900ms ease;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .sub {
       font-size: 13px;
-      color: rgba(31, 26, 23, 0.55);
+      color: rgba(31, 27, 22, 0.55);
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .ad-slot {
+      background: #fdf6ef;
+      border: 1px dashed rgba(31, 27, 22, 0.4);
+      border-radius: 18px;
+      padding: 18px;
+      text-align: center;
+      font-size: 13px;
+      color: rgba(31, 27, 22, 0.6);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .calculator {
+      display: grid;
+      gap: 12px;
+    }
+
+    .calculator label {
+      font-size: 13px;
+      color: rgba(31, 27, 22, 0.7);
+    }
+
+    .calculator input,
+    .calculator select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(31, 27, 22, 0.2);
+      font-size: 14px;
+    }
+
+    .result {
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(31, 122, 87, 0.1);
+      font-size: 14px;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 8px;
+    }
+
+    .checklist label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: rgba(31, 27, 22, 0.55);
+      margin-top: 16px;
     }
 
     @keyframes floatIn {
       from { opacity: 0; transform: translateY(16px) scale(0.98); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
-  <main class="frame">
-    <header>
-      <h1>오늘의 고양이</h1>
-      <p>버튼을 누르면 새로운 고양이 사진이 나타납니다.</p>
-    </header>
-
-    <section class="photo">
-      <img id="catPhoto" alt="고양이 사진" src="https://placekitten.com/900/600" />
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>고정비 줄이기 플래너</h1>
+        <p>가장 접근하기 쉬운 수익화 아이템으로 "생활비 절약"을 선정했습니다. 누구나 겪는 고정비를 줄이는 정보는 검색 수요가 높고, 콘텐츠형 광고와 잘 맞습니다.</p>
+        <div class="chips">
+          <span class="chip">광고 친화형 콘텐츠</span>
+          <span class="chip">1인 가구·초보 직장인</span>
+          <span class="chip">무료 계산기 + 체크리스트</span>
+          <span class="chip">바로 실행 가능</span>
+        </div>
+        <div class="cta">
+          <button class="btn" type="button" onclick="document.getElementById('tools').scrollIntoView({behavior: 'smooth'});">무료 도구 바로가기</button>
+          <button class="btn secondary" type="button" onclick="document.getElementById('ideas').scrollIntoView({behavior: 'smooth'});">50개 아이템 보기</button>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="stat">
+          <strong>월 15만원</strong>
+          <span class="sub">고정비 절감 가능 구간</span>
+        </div>
+        <div class="stat">
+          <strong>30일 루틴</strong>
+          <span class="sub">통신/구독/보험/식비 최적화</span>
+        </div>
+        <div class="stat">
+          <strong>무료</strong>
+          <span class="sub">계산기와 체크리스트 제공</span>
+        </div>
+      </div>
     </section>
 
-    <div class="actions">
-      <button id="refreshBtn" type="button">다른 고양이 보기</button>
-      <span class="hint">고양이는 전 세계 어딘가에서 지금도 점프 중입니다.</span>
+    <section class="ad-slot">Ad Slot · Top Banner (Google AdSense 영역)</section>
+
+    <section class="grid">
+      <article class="card">
+        <div class="section-head">
+          <h2>왜 이 아이템인가</h2>
+          <span class="sub">전문적으로 선택한 이유</span>
+        </div>
+        <ul class="list">
+          <li>누구나 즉시 행동 가능한 “절약” 주제는 접근성이 가장 높습니다.</li>
+          <li>검색형 트래픽이 풍부하고 재방문율이 높아 광고 노출에 유리합니다.</li>
+          <li>계산기/체크리스트 같은 도구형 콘텐츠는 체류 시간을 늘립니다.</li>
+          <li>추후 이메일 구독, 제휴 카드/통신사 비교로 확장 가능성이 큽니다.</li>
+        </ul>
+      </article>
+      <article class="card" id="tools">
+        <div class="section-head">
+          <h2>절약 계산기</h2>
+          <span class="sub">월 고정비 기준</span>
+        </div>
+        <div class="calculator">
+          <label>현재 월 고정비 (원)</label>
+          <input id="fixedCost" type="number" min="0" placeholder="예: 1200000" />
+          <label>목표 절감률</label>
+          <select id="targetRate">
+            <option value="5">5%</option>
+            <option value="10" selected>10%</option>
+            <option value="15">15%</option>
+            <option value="20">20%</option>
+          </select>
+          <button class="btn" type="button" id="calcBtn">절감액 계산하기</button>
+          <div class="result" id="calcResult">월 절감액과 연간 절감액이 여기에 표시됩니다.</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="section-head">
+          <h2>구독 정리 체크리스트</h2>
+          <span class="sub">필요 없는 결제 해지</span>
+        </div>
+        <div class="checklist" id="subChecklist">
+          <label><input type="checkbox" data-cost="12900" /> 동영상 스트리밍 (월 12,900원)</label>
+          <label><input type="checkbox" data-cost="9900" /> 음악 스트리밍 (월 9,900원)</label>
+          <label><input type="checkbox" data-cost="6900" /> 클라우드 저장소 (월 6,900원)</label>
+          <label><input type="checkbox" data-cost="7900" /> 뉴스/콘텐츠 구독 (월 7,900원)</label>
+          <label><input type="checkbox" data-cost="4900" /> 피트니스 앱 (월 4,900원)</label>
+        </div>
+        <div class="result" id="subResult">선택한 구독을 모두 정리하면 월 절감액이 계산됩니다.</div>
+      </article>
+    </section>
+
+    <section class="ad-slot">Ad Slot · In-Content (반응형 광고 영역)</section>
+
+    <section class="grid">
+      <article class="card">
+        <div class="section-head">
+          <h2>30일 루틴 요약</h2>
+          <span class="sub">바로 실행 가능한 플랜</span>
+        </div>
+        <ul class="list">
+          <li>1주차: 통신/구독/앱 결제 정리 + 해지 예약</li>
+          <li>2주차: 보험/대출 이자 비교 + 불필요 특약 정리</li>
+          <li>3주차: 식비·편의점 지출 제한, 주간 장보기 루틴 만들기</li>
+          <li>4주차: 이동비/교통비 비교, 정기권/카드 혜택 최적화</li>
+        </ul>
+      </article>
+      <article class="card">
+        <div class="section-head">
+          <h2>FAQ</h2>
+          <span class="sub">자주 묻는 질문</span>
+        </div>
+        <ul class="list">
+          <li>Q. 절약 목표는 몇 퍼센트가 적당하나요? A. 처음에는 5~10%로 시작하세요.</li>
+          <li>Q. 고정비를 줄여도 생활 질이 떨어지지 않나요? A. “중복 구독”부터 정리하면 체감이 없습니다.</li>
+          <li>Q. 계산기는 어디까지 신뢰할 수 있나요? A. 입력값 기반의 참고치이며, 실사용 데이터로 업데이트하세요.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="card" id="ideas">
+      <div class="section-head">
+        <h2>사업화 가능한 50가지 아이템</h2>
+        <span class="sub">검토 후 "생활비 절약"을 최종 선정</span>
+      </div>
+      <ul class="list">
+        <li>1인 가구 고정비 절감 플래너</li>
+        <li>직장인 점심 식단/도시락 루틴</li>
+        <li>전기·수도·가스 요금 절약 가이드</li>
+        <li>중고 거래 적정가/시세 계산기</li>
+        <li>간단 보험 리모델링 체크리스트</li>
+        <li>카드 혜택 비교 요약 페이지</li>
+        <li>월세/전세 계약 체크리스트</li>
+        <li>국내 지역 축제 일정 큐레이션</li>
+        <li>초보 프리랜서 견적 템플릿</li>
+        <li>자격증 공부 루틴 트래커</li>
+        <li>주말 홈카페 레시피 모음</li>
+        <li>직장인 운동 루틴 10분 버전</li>
+        <li>모바일 사진 정리 가이드</li>
+        <li>개인 브랜딩 프로필 제작 팁</li>
+        <li>AI 도구 추천 및 활용 사례</li>
+        <li>이력서 문장 자동 개선 가이드</li>
+        <li>면접 예상 질문 모음</li>
+        <li>간편 심리 테스트 콘텐츠</li>
+        <li>연말정산 필수 체크리스트</li>
+        <li>외식/배달비 절약 캘린더</li>
+        <li>국내 단기여행 1박2일 코스</li>
+        <li>가족 일정 공유 템플릿</li>
+        <li>전자제품 구매 가이드</li>
+        <li>초보 주식 용어 사전</li>
+        <li>로컬 카페 작업 공간 지도</li>
+        <li>집 청소 동선 최적화 가이드</li>
+        <li>캡슐 옷장 구축 리스트</li>
+        <li>장보기 주간 메뉴 플래너</li>
+        <li>새벽 기상 루틴 챌린지</li>
+        <li>독서 요약 카드 템플릿</li>
+        <li>집중력 음악/화이트노이즈 모음</li>
+        <li>스마트폰 데이터 절약 가이드</li>
+        <li>반려동물 비용 절약 팁</li>
+        <li>작은 사업자 세금 기초</li>
+        <li>내 집 꾸미기 예산 플래너</li>
+        <li>취업용 포트폴리오 구조</li>
+        <li>육아 필수템 비교표</li>
+        <li>온라인 강의 시간표 플래너</li>
+        <li>업무용 템플릿 무료 모음</li>
+        <li>무료 이미지/아이콘 리소스 모음</li>
+        <li>웹사이트 속도 체크 가이드</li>
+        <li>초보 창업 체크리스트</li>
+        <li>주 4일제 생산성 루틴</li>
+        <li>자기계발 루틴 캘린더</li>
+        <li>건강검진 일정 관리 도구</li>
+        <li>노션 템플릿 소개</li>
+        <li>자기소개서 문장 예시</li>
+        <li>여행 준비물 체크리스트</li>
+        <li>집밥 레시피 가격 비교</li>
+      </ul>
+    </section>
+
+    <section class="ad-slot">Ad Slot · Footer (하단 광고 영역)</section>
+
+    <div class="footer">
+      이 페이지는 정보 제공 목적이며 개인 상황에 따라 결과가 달라질 수 있습니다.
     </div>
   </main>
 
   <script>
-    const catPhoto = document.getElementById("catPhoto");
-    const refreshBtn = document.getElementById("refreshBtn");
+    const calcBtn = document.getElementById("calcBtn");
+    const fixedCost = document.getElementById("fixedCost");
+    const targetRate = document.getElementById("targetRate");
+    const calcResult = document.getElementById("calcResult");
+    const subChecklist = document.getElementById("subChecklist");
+    const subResult = document.getElementById("subResult");
 
-    const sizes = [
-      [900, 600],
-      [880, 620],
-      [920, 640],
-      [950, 610],
-      [930, 630]
-    ];
-
-    function loadRandomCat() {
-      const [w, h] = sizes[Math.floor(Math.random() * sizes.length)];
-      const cacheBust = Date.now();
-      catPhoto.src = `https://placekitten.com/${w}/${h}?v=${cacheBust}`;
+    function formatWon(value) {
+      return new Intl.NumberFormat("ko-KR").format(value) + "원";
     }
 
-    refreshBtn.addEventListener("click", loadRandomCat);
+    calcBtn.addEventListener("click", () => {
+      const cost = Number(fixedCost.value || 0);
+      const rate = Number(targetRate.value || 0) / 100;
+      const monthly = Math.round(cost * rate);
+      const yearly = monthly * 12;
+
+      if (!cost) {
+        calcResult.textContent = "현재 월 고정비를 입력해 주세요.";
+        return;
+      }
+
+      calcResult.textContent = `월 절감액 ${formatWon(monthly)} · 연간 절감액 ${formatWon(yearly)}`;
+    });
+
+    function updateSubscriptions() {
+      const checks = subChecklist.querySelectorAll("input[type='checkbox']");
+      let total = 0;
+      checks.forEach((checkbox) => {
+        if (checkbox.checked) {
+          total += Number(checkbox.dataset.cost || 0);
+        }
+      });
+      if (total === 0) {
+        subResult.textContent = "선택한 구독이 없습니다.";
+        return;
+      }
+      subResult.textContent = `정리 시 월 ${formatWon(total)} 절감 가능`;
+    }
+
+    subChecklist.addEventListener("change", updateSubscriptions);
   </script>
 </body>
 </html>
