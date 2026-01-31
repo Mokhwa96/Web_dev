@@ -1,0 +1,178 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>고양이 사진</title>
+  <style>
+    :root {
+      --bg-1: #f6e7d8;
+      --bg-2: #f4c7ab;
+      --ink: #1f1a17;
+      --accent: #2b7a78;
+      --card: #fff6ee;
+      --shadow: rgba(0, 0, 0, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Space Grotesk", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(80vmax 80vmax at 10% 10%, rgba(255, 255, 255, 0.65), transparent 55%),
+        radial-gradient(60vmax 60vmax at 90% 20%, rgba(43, 122, 120, 0.18), transparent 60%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      display: grid;
+      place-items: center;
+      padding: 32px 18px;
+    }
+
+    .frame {
+      width: min(880px, 92vw);
+      background: var(--card);
+      border-radius: 26px;
+      box-shadow: 0 25px 60px var(--shadow);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      animation: floatIn 900ms ease;
+    }
+
+    .frame::before,
+    .frame::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(43, 122, 120, 0.12);
+      filter: blur(0.5px);
+      z-index: 0;
+    }
+
+    .frame::before { top: -80px; right: -70px; }
+    .frame::after { bottom: -90px; left: -70px; }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      margin: 0;
+      font-size: 16px;
+      color: rgba(31, 26, 23, 0.7);
+    }
+
+    .photo {
+      margin-top: 22px;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      border: 2px solid rgba(43, 122, 120, 0.2);
+      background: #fef9f3;
+    }
+
+    .photo img {
+      display: block;
+      width: 100%;
+      height: min(55vh, 460px);
+      object-fit: cover;
+      transform: scale(1.02);
+      transition: transform 600ms ease;
+    }
+
+    .photo:hover img {
+      transform: scale(1.07);
+    }
+
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    button {
+      border: none;
+      background: var(--accent);
+      color: #fdfcfb;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+      box-shadow: 0 10px 20px rgba(43, 122, 120, 0.3);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 26px rgba(43, 122, 120, 0.35);
+    }
+
+    .hint {
+      font-size: 13px;
+      color: rgba(31, 26, 23, 0.55);
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <main class="frame">
+    <header>
+      <h1>오늘의 고양이</h1>
+      <p>버튼을 누르면 새로운 고양이 사진이 나타납니다.</p>
+    </header>
+
+    <section class="photo">
+      <img id="catPhoto" alt="고양이 사진" src="https://placekitten.com/900/600" />
+    </section>
+
+    <div class="actions">
+      <button id="refreshBtn" type="button">다른 고양이 보기</button>
+      <span class="hint">고양이는 전 세계 어딘가에서 지금도 점프 중입니다.</span>
+    </div>
+  </main>
+
+  <script>
+    const catPhoto = document.getElementById("catPhoto");
+    const refreshBtn = document.getElementById("refreshBtn");
+
+    const sizes = [
+      [900, 600],
+      [880, 620],
+      [920, 640],
+      [950, 610],
+      [930, 630]
+    ];
+
+    function loadRandomCat() {
+      const [w, h] = sizes[Math.floor(Math.random() * sizes.length)];
+      const cacheBust = Date.now();
+      catPhoto.src = `https://placekitten.com/${w}/${h}?v=${cacheBust}`;
+    }
+
+    refreshBtn.addEventListener("click", loadRandomCat);
+  </script>
+</body>
+</html>
