@@ -4,6 +4,6 @@
 
 - Production branch: `main`
 - Build command: `exit 0`
-- Build output directory: `public`
+- Build output directory: `.`
 
-`public/index.html`이 루트(`/`)로 노출됩니다.
+`index.html`이 루트(`/`)로 노출됩니다.
