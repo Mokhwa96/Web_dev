@@ -12,6 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <head>
+        <meta name="google-adsense-account" content="ca-pub-7210181923076065" />
         <Script
           id="adsense"
           async
