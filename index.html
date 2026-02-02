@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-K53HBFRR");
+    </script>
+    <!-- End Google Tag Manager -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "vahp3bmjf2");
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-adsense-account" content="ca-pub-7210181923076065" />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7210181923076065"
+      crossorigin="anonymous"
+    ></script>
+    <title>임베디드 메이커스 라운지 | 하드웨어펌웨어 개발자 커뮤니티</title>
+    <meta
+      name="description"
+      content="임베디드 하드웨어/소프트웨어 개발자를 위한 커뮤니티. MCU, RTOS, 보드, 디버깅, 툴체인, 커리어 토픽을 한 곳에서 나누세요."
+    />
+    <meta name="theme-color" content="#f7f7f8" />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f7f8;
+        --surface: #ffffff;
+        --ink: #1b1b1f;
+        --muted: #5c5c66;
+        --border: #e5e7eb;
+        --accent: #2a2a2e;
+        --accent-soft: #f1f1f4;
+        --chip: #eef0f3;
+        --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "SUIT", "Pretendard", "Noto Sans KR", sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      main {
+        display: block;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 260px minmax(0, 1fr);
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        padding: 28px 24px;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+      }
+
+      .brand {
+        display: grid;
+        gap: 6px;
+        margin-bottom: 28px;
+      }
+
+      .brand h1 {
+        font-size: 20px;
+        margin: 0;
+        letter-spacing: -0.02em;
+      }
+
+      .brand p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .nav {
+        display: grid;
+        gap: 8px;
+      }
+
+      .nav a {
+        padding: 10px 12px;
+        border-radius: 10px;
+        font-size: 14px;
+        color: var(--muted);
+        transition: background 150ms ease, color 150ms ease;
+      }
+
+      .nav a:hover {
+        background: var(--accent-soft);
+        color: var(--ink);
+      }
+
+      .sidebar .meta {
+        margin-top: 28px;
+        padding: 14px;
+        border-radius: 14px;
+        background: var(--accent-soft);
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .content {
+        padding: 32px 36px 60px;
+      }
+
+      .topbar {
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+
+      .topbar .menu {
+        padding: 10px 12px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        font-size: 14px;
+      }
+
+      .hero {
+        background: var(--surface);
+        padding: 28px;
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+        display: grid;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .hero-media {
+        display: grid;
+        gap: 12px;
+      }
+
+      .hero-media img {
+        width: 100%;
+        border-radius: 18px;
+        display: block;
+        object-fit: cover;
+      }
+
+      .hero h2 {
+        margin: 0;
+        font-size: clamp(24px, 3.2vw, 32px);
+      }
+
+      .hero p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        background: var(--chip);
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+      }
+
+      .media-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+      }
+
+      .media-card {
+        background: var(--surface);
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      .media-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .media-card .caption {
+        padding: 12px 14px 14px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .card {
+        background: var(--surface);
+        border-radius: 18px;
+        padding: 18px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+      }
+
+      .card h3 {
+        margin: 0 0 10px;
+        font-size: 16px;
+      }
+
+      .card p,
+      .card li {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .list {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .ad-slot {
+        background: var(--surface);
+        border: 1px dashed var(--border);
+        color: var(--muted);
+        padding: 16px;
+        border-radius: 14px;
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin: 20px 0;
+      }
+
+      .footer {
+        margin-top: 28px;
+        color: var(--muted);
+        font-size: 12px;
+        text-align: center;
+      }
+
+      @media (max-width: 980px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          position: static;
+          height: auto;
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+        }
+
+        .topbar {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-K53HBFRR"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <h1>Embedded Makers</h1>
+          <p>HW · FW 개발자 커뮤니티</p>
+        </div>
+        <nav class="nav">
+          <a href="/">홈</a>
+          <a href="/board">게시판</a>
+          <a href="/board/new">글쓰기</a>
+          <a href="/resources">자료실</a>
+          <a href="/showcase">프로젝트</a>
+          <a href="/about">커뮤니티 소개</a>
+          <a href="/login">로그인</a>
+        </nav>
+        <div class="meta">
+          오늘의 가이드: 전원 노이즈 줄이는 보드 레이아웃 팁, 디버깅 로그 공유
+          방식, OTA 업데이트 체크리스트
+        </div>
+      </aside>
+      <div class="content">
+        <div class="topbar">
+          <div>Embedded Makers</div>
+          <div class="menu">메뉴</div>
+        </div>
+        <main>
+          <section class="hero">
+            <h2>임베디드 개발자들이 모이는 실전 커뮤니티</h2>
+            <p>
+              MCU, RTOS, 보드 설계, 디버깅, 툴체인까지. 반복되는 문제를 빠르게
+              해결하고 프로젝트를 확장할 수 있도록 핵심 정보를 정리합니다.
+            </p>
+            <div class="chip-row">
+              <span class="chip">MCU · RTOS</span>
+              <span class="chip">보드 설계</span>
+              <span class="chip">디버깅 노트</span>
+              <span class="chip">프로젝트 쇼케이스</span>
+            </div>
+            <div class="hero-media">
+              <img
+                src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1400&q=80"
+                alt="디버깅 장비와 보드가 놓인 작업 데스크"
+                loading="lazy"
+              />
+            </div>
+          </section>
+
+          <section class="media-grid">
+            <article class="media-card">
+              <img
+                src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80"
+                alt="마이크로컨트롤러 보드 클로즈업"
+                loading="lazy"
+              />
+              <div class="caption">
+                보드 설계, 디버깅 기록, 펌웨어 구조를 한 번에 공유
+              </div>
+            </article>
+            <article class="media-card">
+              <img
+                src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80"
+                alt="전자 장비가 있는 작업실"
+                loading="lazy"
+              />
+              <div class="caption">
+                실무 환경에 가까운 문제 해결과 협업에 집중
+              </div>
+            </article>
+          </section>
+
+          <section class="grid">
+            <article class="card">
+              <h3>핵심 카테고리</h3>
+              <ul class="list">
+                <li>STM32 · ESP32 · nRF · RISC-V</li>
+                <li>FreeRTOS · Zephyr · RT-Thread</li>
+                <li>전원 · 신호 무결성 · 레이아웃</li>
+                <li>로깅 · 펌웨어 테스트 · OTA</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>이번 주 인기 질문</h3>
+              <ul class="list">
+                <li>DMA 인터럽트 누락 원인 분석</li>
+                <li>스텝다운 레귤레이터 발열 저감</li>
+                <li>RTOS 우선순위 역전 대응</li>
+                <li>CAN-FD 버스 오류 로그 해석</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>참여 방법</h3>
+              <p>
+                질문은 구체적으로, 해결 과정은 짧게 요약해 주세요. 테스트 로그와
+                회로 캡처가 있는 글은 우선적으로 큐레이션됩니다.
+              </p>
+            </article>
+          </section>
+
+          <section class="ad-slot">Ad Slot · Top Banner (Google AdSense)</section>
+
+          <section class="grid">
+            <article class="card">
+              <h3>빠른 스타터 키트</h3>
+              <ul class="list">
+                <li>개발환경 설치 체크리스트</li>
+                <li>시리얼 로그 포맷 템플릿</li>
+                <li>현장 재현 테스트 케이스</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>프로젝트 쇼케이스</h3>
+              <p>
+                주간 하이라이트는 프로젝트 페이지에서 확인하세요. 하드웨어 사진과
+                펌웨어 구조를 함께 소개합니다.
+              </p>
+            </article>
+            <article class="card">
+              <h3>커리어 라운지</h3>
+              <p>면접 질문 풀이, 포트폴리오 리뷰, 채용 공고 요약을 함께 제공합니다.</p>
+            </article>
+          </section>
+
+          <section class="ad-slot">Ad Slot · In-Content (Google AdSense)</section>
+
+          <div class="footer">
+            임베디드 메이커스 라운지는 실전 경험 공유를 위한 커뮤니티입니다.
+            <div>Images: Unsplash (Adafruit Industries, Umberto, Chris Ried)</div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
