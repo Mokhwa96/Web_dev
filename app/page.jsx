@@ -13,6 +13,32 @@ export default function HomePage() {
           <span className="chip">디버깅 노트</span>
           <span className="chip">프로젝트 쇼케이스</span>
         </div>
+        <div className="hero-media">
+          <img
+            src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1400&q=80"
+            alt="디버깅 장비와 보드가 놓인 작업 데스크"
+            loading="lazy"
+          />
+        </div>
+      </section>
+
+      <section className="media-grid">
+        <article className="media-card">
+          <img
+            src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80"
+            alt="마이크로컨트롤러 보드 클로즈업"
+            loading="lazy"
+          />
+          <div className="caption">보드 설계, 디버깅 기록, 펌웨어 구조를 한 번에 공유</div>
+        </article>
+        <article className="media-card">
+          <img
+            src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80"
+            alt="전자 장비가 있는 작업실"
+            loading="lazy"
+          />
+          <div className="caption">실무 환경에 가까운 문제 해결과 협업에 집중</div>
+        </article>
       </section>
 
       <section className="grid">
@@ -73,6 +99,7 @@ export default function HomePage() {
 
       <div className="footer">
         임베디드 메이커스 라운지는 실전 경험 공유를 위한 커뮤니티입니다.
+        <div>Images: Unsplash (Adafruit Industries, Umberto, Chris Ried)</div>
       </div>
     </main>
   );

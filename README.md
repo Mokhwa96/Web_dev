@@ -19,3 +19,4 @@ npm run export
 - Next.js App Router 기반 멀티 페이지 구조
 - 사이드바 네비게이션 + 게시판/자료실/프로젝트 페이지 포함
 - Cloudflare Pages 배포 시 빌드 결과는 `out` 디렉터리
+- 로그인/게시판은 Supabase (Auth + DB + Storage) 사용

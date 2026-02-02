@@ -1,37 +1,20 @@
-const POSTS = [
-  {
-    title: "STM32 UART DMA 수신이 가끔 멈춥니다",
-    author: "hw_firmware",
-    time: "2시간 전",
-    tags: ["STM32", "DMA", "UART"]
-  },
-  {
-    title: "FreeRTOS 우선순위 역전 로그 공유",
-    author: "kernel.dev",
-    time: "6시간 전",
-    tags: ["FreeRTOS", "Mutex", "Debug"]
-  },
-  {
-    title: "전원 레귤레이터 발열 줄이는 방법",
-    author: "boardlab",
-    time: "어제",
-    tags: ["Power", "Layout", "Thermal"]
-  },
-  {
-    title: "ESP32 OTA 업데이트 실패 사례",
-    author: "iotbuilder",
-    time: "2일 전",
-    tags: ["ESP32", "OTA", "Wi-Fi"]
-  },
-  {
-    title: "CAN-FD 버스 오류 분석 로그",
-    author: "vehicle-fw",
-    time: "3일 전",
-    tags: ["CAN-FD", "Logging"]
-  }
-];
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { supabase } from "../../lib/supabaseClient";
 
 export default function BoardPage() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    supabase
+      .from("posts")
+      .select("id,title,created_at,author,tag_list")
+      .order("created_at", { ascending: false })
+      .then(({ data }) => setPosts(data || []));
+  }, []);
+
   return (
     <main>
       <section className="hero">
@@ -49,14 +32,19 @@ export default function BoardPage() {
       </section>
 
       <section className="board-list">
-        {POSTS.map((post) => (
-          <article className="board-item" key={post.title}>
-            <h4>{post.title}</h4>
+        {posts.map((post) => (
+          <article className="board-item" key={post.id}>
+            <h4>
+              <Link href={`/board/${post.id}`}>{post.title}</Link>
+            </h4>
             <div className="meta">
-              {post.author} · {post.time}
+              {post.author || "익명"} ·{" "}
+              {post.created_at
+                ? new Date(post.created_at).toLocaleDateString("ko-KR")
+                : ""}
             </div>
             <div className="tags">
-              {post.tags.map((tag) => (
+              {(post.tag_list || []).map((tag) => (
                 <span className="tag" key={tag}>
                   {tag}
                 </span>
@@ -64,6 +52,9 @@ export default function BoardPage() {
             </div>
           </article>
         ))}
+        {!posts.length ? (
+          <div className="helper">아직 게시글이 없습니다.</div>
+        ) : null}
       </section>
 
       <section className="ad-slot">Ad Slot · Board (Google AdSense)</section>

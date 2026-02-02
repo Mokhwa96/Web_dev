@@ -6,9 +6,11 @@ import { usePathname } from "next/navigation";
 const NAV_ITEMS = [
   { href: "/", label: "홈" },
   { href: "/board", label: "게시판" },
+  { href: "/board/new", label: "글쓰기" },
   { href: "/resources", label: "자료실" },
   { href: "/showcase", label: "프로젝트" },
-  { href: "/about", label: "커뮤니티 소개" }
+  { href: "/about", label: "커뮤니티 소개" },
+  { href: "/login", label: "로그인" }
 ];
 
 export default function Sidebar() {
