@@ -5,7 +5,7 @@ export default function HomePage() {
         <h2>임베디드 개발자들이 모이는 실전 커뮤니티</h2>
         <p>
           MCU, RTOS, 보드 설계, 디버깅, 툴체인까지. 반복되는 문제를 빠르게
-          해결하고 프로젝트를 확장할 수 있도록 핵심 정보를 정리합니다.
+          해결하고 프로젝트를 확장할 수 있도록 핵심 정보를 정리합니다.111111111111111111111
         </p>
         <div className="chip-row">
           <span className="chip">MCU · RTOS</span>
